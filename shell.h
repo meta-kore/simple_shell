@@ -7,6 +7,8 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 #define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH '\0'
@@ -26,6 +28,7 @@ typedef struct {
     int cmd_buf_type;
     char *path;
     int linecount_flag;
+    int err_num;
 } info_t;
 
 // Function prototypes
@@ -43,7 +46,17 @@ void replace_string(char **old, char *new);
 int replace_alias(info_t *info);
 int replace_vars(info_t *info);
 
-// Other function prototypes (omitted for brevity)
+// Utility functions
+int _putchar(char c);
+char *_strdup(const char *str);
+char *_strcat(char *dest, char *src);
+size_t _strlen(const char *s);
+int _strcmp(char *s1, char *s2);
+char *starts_with(const char *haystack, const char *needle);
+
+// Parser functions
+char **strtow(char *str, char *d);
+char **strtow2(char *str, char d);
 
 #endif /* SHELL_H */
 

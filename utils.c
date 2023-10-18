@@ -1,22 +1,32 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include "utils.h"
+#include "shell.h"
 
-void print_error(Error error)
+int _putchar(char c)
 {
-    fprintf(stderr, "Error %d: %s\n", error.code, error.message);
+    // Implementation of _putchar function
 }
 
-char *strdup(const char *str)
+char *_strdup(const char *str)
 {
-    size_t len = strlen(str) + 1;
-    char *dup_str = malloc(len);
-    if (!dup_str)
-    {
-        print_error((Error){1, "Memory allocation error"});
-        return NULL;
-    }
-    return strcpy(dup_str, str);
+    // Implementation of _strdup function
+}
+
+char *_strcat(char *dest, char *src)
+{
+    // Implementation of _strcat function
+}
+
+size_t _strlen(const char *s)
+{
+    // Implementation of _strlen function
+}
+
+int _strcmp(char *s1, char *s2)
+{
+    // Implementation of _strcmp function
+}
+
+char *starts_with(const char *haystack, const char *needle)
+{
+    // Implementation of starts_with function
 }
 
