@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
-* main - runs SHELL program (idan)
-* @argc: Argument count.
+* main - runs SHELL program
+* @argc: Argument count
 * @argv: Argument vector
 * @env: The shell environment
 * Return: Exit status of the program
