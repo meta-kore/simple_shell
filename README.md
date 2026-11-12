@@ -1,44 +1,58 @@
-Description
+# simple_shell
 
-a simple UNIX command interpreter that replicates functionalities of the simple shell (sh). Additional functions are also included. This program was written entirely in C as a milestone project for ALX Africa Software Engineering.
+A small UNIX command interpreter written in C, modelled on `sh`. It reads a line, resolves the command through `PATH`, forks, and runs it with `execve`, in interactive or piped (non-interactive) mode.
 
-### Installation
-
-Clone this repository into your working directory. For best results, files should be compiled with GCC and the following flags: -Wall -Wextra -Werror -pedantic -std=gnu89
-
-### Usage
-
-After compilation, the resulting program can run stand-alone, either in interactive or non-interactive mode.
-
-#### Interactive Mode
-
-In interactive mode, simply run the program and wait for the prompt to appear. From there, you can type commands freely, exiting with either the "exit" command or ctrl-D.
-
-#### Non-Interactive Mode
-
-In non-interactive mode, echo your desired command and pipe it into the program like this:
-
-```sh
-echo "ls" | ./shell
+```
+$ echo "ls" | ./hsh
 ```
 
-In non-interactive mode, the program will exit after finishing your desired command(s).
+## Build
 
-#### Included Built-Ins
+```sh
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+```
 
-Our shell has support for the following built-in commands:
+Compile every `.c` file in the repository root. The `first-run/` directory is the team's first draft of the shell, kept for history.
 
-| Command             | Definition                                                                                |
-| ------------------- | ----------------------------------------------------------------------------------------- |
-| exit [n]            | Exit the shell, with an optional exit status, n.                                          |
-| env                 | Print the environment.                                                                    |
-| setenv [var][value] | Set an environment variable and value. If the variable exists, the value will be updated. |
-| unsetenv [var]      | Remove an environment variable.                                                           |
-| cd [dir]            | Change the directory.                                                                     |
-| help [built-in]     | Read documentation for a built-in.                                                        |
+## Use
 
+**Interactive:** run `./hsh`, type commands at the prompt, leave with `exit` or Ctrl-D.
 
-### Credits
+**Non-interactive:** pipe commands in; the shell exits when they finish.
 
-All code written by [Jones Mereu]([https://github.com/meta-kore]) and [Peter Pepple](https://github.com/Peterez-Git).
+```sh
+echo "/bin/ls -l" | ./hsh
+```
 
+## Built-ins
+
+| Command | What it does |
+|---|---|
+| `exit [n]` | Leave the shell, with an optional exit status |
+| `env` | Print the environment |
+| `setenv VAR VALUE` | Set an environment variable |
+| `unsetenv VAR` | Remove an environment variable |
+| `cd [dir]` | Change directory |
+| `echo` | Print arguments; expands `$$` (process id), `$?` (last exit status) and `$PATH` |
+
+## Known limits
+
+- `setenv` and `unsetenv` do not show up in `env` output or in the environment of child processes.
+- There is no `help` built-in, pipes, redirection or job control.
+
+## Layout
+
+```
+main.c               Read-eval loop
+getline.c token.c    Input and tokenizing
+handle_path.c        PATH lookup
+exec.c               fork and execve
+handle_*.c           Built-ins
+change_dir.c         cd
+string*.c print.c    String and output helpers
+first-run/           Earlier draft of the shell
+```
+
+## Credits
+
+Written by [Jones Mereu](https://github.com/meta-kore) and [Peter Pepple](https://github.com/Peterez-Git) as a milestone project for ALX Africa Software Engineering.
