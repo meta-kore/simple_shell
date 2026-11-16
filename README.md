@@ -1,5 +1,7 @@
 # simple_shell
 
+<img src="assets/plate.gif" alt="Plate 04, simple_shell: a command moves through read, tokenize, path lookup, fork and execve." width="100%">
+
 A small UNIX command interpreter written in C, modelled on `sh`. It reads a line, resolves the command through `PATH`, forks, and runs it with `execve`, in interactive or piped (non-interactive) mode.
 
 ```
